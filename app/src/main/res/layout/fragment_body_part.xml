@@ -11,7 +11,7 @@
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_weight="1"
-      tools:src=""
+      tools:src="@drawable/head2"
       android:contentDescription="@string/head" />
 
   <ImageView
@@ -19,12 +19,14 @@
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_weight="1"
+      tools:src="@drawable/body2"
       android:contentDescription="@string/body" />
 
   <ImageView
       android:id="@+id/body_legs"
       android:layout_width="match_parent"
       android:layout_height="0dp"
+      tools:src="@drawable/legs1"
       android:layout_weight="1"
       android:contentDescription="@string/legs" />
 </LinearLayout>

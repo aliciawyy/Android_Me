@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -44,18 +45,15 @@ public class BodyPartFragment extends Fragment {
   }
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (getArguments() != null) {
-      mParam1 = getArguments().getString(ARG_PARAM1);
-      mParam2 = getArguments().getString(ARG_PARAM2);
-    }
-  }
-
-  @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_body_part, container, false);
+    View view = inflater.inflate(R.layout.fragment_body_part, container, false);
+    ImageView headView = view.findViewById(R.id.body_head);
+    headView.setImageResource(R.drawable.head1);
+    ImageView bodyView = view.findViewById(R.id.body_body);
+    bodyView.setImageResource(R.drawable.body1);
+    ImageView legsView = view.findViewById(R.id.body_legs);
+    legsView.setImageResource(R.drawable.legs1);
+    return view;
   }
 }
