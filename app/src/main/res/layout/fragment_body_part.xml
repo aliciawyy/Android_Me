@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".BodyPartFragment">
+
+  <ImageView
+      android:id="@+id/body_head"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      tools:src=""
+      android:contentDescription="@string/head" />
+
+  <ImageView
+      android:id="@+id/body_body"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:contentDescription="@string/body" />
+
+  <ImageView
+      android:id="@+id/body_legs"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:contentDescription="@string/legs" />
+</LinearLayout>
