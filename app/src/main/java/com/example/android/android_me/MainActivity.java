@@ -12,8 +12,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (findViewById(R.id.fragment_container) != null) {
             BodyPartFragment bodyPartFragment = new BodyPartFragment();
+            MasterListFragment masterListFragment = new MasterListFragment();
             getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, bodyPartFragment).commit();
+                .add(R.id.fragment_container, masterListFragment).commit();
         }
     }
 }

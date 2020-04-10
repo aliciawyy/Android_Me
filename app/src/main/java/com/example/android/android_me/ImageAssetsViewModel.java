@@ -1,5 +1,6 @@
 package com.example.android.android_me;
 
+import androidx.annotation.DrawableRes;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -9,7 +10,7 @@ public class ImageAssetsViewModel extends ViewModel {
     private final MutableLiveData<Integer> bodyIndex = new MutableLiveData<>(0);
     private final MutableLiveData<Integer> legsIndex = new MutableLiveData<>(0);
 
-    static int[] sHeadResources = {
+    static @DrawableRes int[] sHeadResources = {
         R.drawable.head1,
         R.drawable.head2,
         R.drawable.head3,
@@ -24,7 +25,7 @@ public class ImageAssetsViewModel extends ViewModel {
         R.drawable.head12,
     };
 
-    static int[] sBodyResources = {
+    static @DrawableRes int[] sBodyResources = {
         R.drawable.body1,
         R.drawable.body2,
         R.drawable.body3,
@@ -39,7 +40,7 @@ public class ImageAssetsViewModel extends ViewModel {
         R.drawable.body12,
     };
 
-    static int[] sLegsResources = {
+    static @DrawableRes int[] sLegsResources = {
         R.drawable.legs1,
         R.drawable.legs2,
         R.drawable.legs3,
@@ -53,6 +54,22 @@ public class ImageAssetsViewModel extends ViewModel {
         R.drawable.legs11,
         R.drawable.legs12,
     };
+
+    static int getTotalImageNumber() {
+        return sHeadResources.length + sBodyResources.length + sLegsResources.length;
+    }
+
+    static @DrawableRes int getImageResource(int position) {
+        if (position < sHeadResources.length) {
+            return sHeadResources[position];
+        }
+        position -= sHeadResources.length;
+        if (position < sBodyResources.length) {
+            return sBodyResources[position];
+        }
+        position -= sLegsResources.length;
+        return sLegsResources[position];
+    }
 
     void incrementHeadIndex() {
         Integer value = headIndex.getValue();
