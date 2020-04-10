@@ -71,6 +71,16 @@ public class ImageAssetsViewModel extends ViewModel {
         return sLegsResources[position];
     }
 
+    void setImageIndex(int position) {
+        if (position < sHeadResources.length) {
+            headIndex.setValue(position);
+        } else if (position < sHeadResources.length + sBodyResources.length) {
+            bodyIndex.setValue(position - sHeadResources.length);
+        } else {
+            legsIndex.setValue(position - sHeadResources.length - sBodyResources.length);
+        }
+    }
+
     void incrementHeadIndex() {
         Integer value = headIndex.getValue();
         ++value;

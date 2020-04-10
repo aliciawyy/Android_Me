@@ -20,19 +20,22 @@ public class BodyPartFragment extends Fragment {
   private ImageView mBodyView;
   private ImageView mLegsView;
 
+  private ImageAssetsViewModel mImageAssetsViewModel;
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_body_part, container, false);
-
+    mImageAssetsViewModel = new ViewModelProvider(requireActivity())
+        .get(ImageAssetsViewModel.class);
     mHeadView = view.findViewById(R.id.body_head);
-    mHeadView.setImageResource(ImageAssetsViewModel.sHeadResources[0]);
+    mHeadView.setImageResource(ImageAssetsViewModel.sHeadResources[mImageAssetsViewModel.getHeadIndex().getValue()]);
 
     mBodyView = view.findViewById(R.id.body_body);
-    mBodyView.setImageResource(ImageAssetsViewModel.sBodyResources[0]);
+    mBodyView.setImageResource(ImageAssetsViewModel.sBodyResources[mImageAssetsViewModel.getBodyIndex().getValue()]);
 
     mLegsView = view.findViewById(R.id.body_legs);
-    mLegsView.setImageResource(ImageAssetsViewModel.sLegsResources[0]);
+    mLegsView.setImageResource(ImageAssetsViewModel.sLegsResources[mImageAssetsViewModel.getLegsIndex().getValue()]);
 
     return view;
   }
@@ -40,19 +43,17 @@ public class BodyPartFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    final ImageAssetsViewModel viewModel = new ViewModelProvider(requireActivity())
-        .get(ImageAssetsViewModel.class);
 
-    mHeadView.setOnClickListener(v -> viewModel.incrementHeadIndex());
-    viewModel.getHeadIndex().observe(getViewLifecycleOwner(),
+    mHeadView.setOnClickListener(v -> mImageAssetsViewModel.incrementHeadIndex());
+    mImageAssetsViewModel.getHeadIndex().observe(getViewLifecycleOwner(),
         index -> mHeadView.setImageResource(ImageAssetsViewModel.sHeadResources[index]));
 
-    mBodyView.setOnClickListener(v -> viewModel.incrementBodyIndex());
-    viewModel.getBodyIndex().observe(getViewLifecycleOwner(),
+    mBodyView.setOnClickListener(v -> mImageAssetsViewModel.incrementBodyIndex());
+    mImageAssetsViewModel.getBodyIndex().observe(getViewLifecycleOwner(),
         index -> mBodyView.setImageResource(ImageAssetsViewModel.sBodyResources[index]));
 
-    mLegsView.setOnClickListener(v -> viewModel.incrementLegsIndex());
-    viewModel.getLegsIndex().observe(getViewLifecycleOwner(),
+    mLegsView.setOnClickListener(v -> mImageAssetsViewModel.incrementLegsIndex());
+    mImageAssetsViewModel.getLegsIndex().observe(getViewLifecycleOwner(),
         index -> mLegsView.setImageResource(ImageAssetsViewModel.sLegsResources[index]));
   }
 }
