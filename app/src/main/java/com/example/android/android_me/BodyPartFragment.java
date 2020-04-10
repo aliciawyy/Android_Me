@@ -3,57 +3,56 @@ package com.example.android.android_me;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 /**
- * A simple {@link Fragment} subclass. Use the {@link BodyPartFragment#newInstance} factory method
- * to create an instance of this fragment.
+ * A simple {@link Fragment} subclass.
  */
 public class BodyPartFragment extends Fragment {
-
-  // TODO: Rename parameter arguments, choose names that match
-  // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-  private static final String ARG_PARAM1 = "param1";
-  private static final String ARG_PARAM2 = "param2";
-
-  // TODO: Rename and change types of parameters
-  private String mParam1;
-  private String mParam2;
-
-  public BodyPartFragment() {
-    // Required empty public constructor
-  }
-
-  /**
-   * Use this factory method to create a new instance of this fragment using the provided
-   * parameters.
-   *
-   * @param param1 Parameter 1.
-   * @param param2 Parameter 2.
-   * @return A new instance of fragment BodyPartFragment.
-   */
-  // TODO: Rename and change types and number of parameters
-  public static BodyPartFragment newInstance(String param1, String param2) {
-    BodyPartFragment fragment = new BodyPartFragment();
-    Bundle args = new Bundle();
-    args.putString(ARG_PARAM1, param1);
-    args.putString(ARG_PARAM2, param2);
-    fragment.setArguments(args);
-    return fragment;
-  }
+  private ImageView mHeadView;
+  private ImageView mBodyView;
+  private ImageView mLegsView;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_body_part, container, false);
-    ImageView headView = view.findViewById(R.id.body_head);
-    headView.setImageResource(R.drawable.head1);
-    ImageView bodyView = view.findViewById(R.id.body_body);
-    bodyView.setImageResource(R.drawable.body1);
-    ImageView legsView = view.findViewById(R.id.body_legs);
-    legsView.setImageResource(R.drawable.legs1);
+
+    mHeadView = view.findViewById(R.id.body_head);
+    mHeadView.setImageResource(ImageAssetsViewModel.sHeadResources[0]);
+
+    mBodyView = view.findViewById(R.id.body_body);
+    mBodyView.setImageResource(ImageAssetsViewModel.sBodyResources[0]);
+
+    mLegsView = view.findViewById(R.id.body_legs);
+    mLegsView.setImageResource(ImageAssetsViewModel.sLegsResources[0]);
+
     return view;
+  }
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    final ImageAssetsViewModel viewModel = new ViewModelProvider(requireActivity())
+        .get(ImageAssetsViewModel.class);
+
+    mHeadView.setOnClickListener(v -> viewModel.incrementHeadIndex());
+    viewModel.getHeadIndex().observe(getViewLifecycleOwner(),
+        index -> mHeadView.setImageResource(ImageAssetsViewModel.sHeadResources[index]));
+
+    mBodyView.setOnClickListener(v -> viewModel.incrementBodyIndex());
+    viewModel.getBodyIndex().observe(getViewLifecycleOwner(),
+        index -> mBodyView.setImageResource(ImageAssetsViewModel.sBodyResources[index]));
+
+    mLegsView.setOnClickListener(v -> viewModel.incrementLegsIndex());
+    viewModel.getLegsIndex().observe(getViewLifecycleOwner(),
+        index -> mLegsView.setImageResource(ImageAssetsViewModel.sLegsResources[index]));
   }
 }
