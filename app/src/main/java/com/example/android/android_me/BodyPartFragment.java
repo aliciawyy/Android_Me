@@ -3,13 +3,11 @@ package com.example.android.android_me;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 /**
@@ -29,13 +27,16 @@ public class BodyPartFragment extends Fragment {
     mImageAssetsViewModel = new ViewModelProvider(requireActivity())
         .get(ImageAssetsViewModel.class);
     mHeadView = view.findViewById(R.id.body_head);
-    mHeadView.setImageResource(ImageAssetsViewModel.sHeadResources[mImageAssetsViewModel.getHeadIndex().getValue()]);
+    mHeadView.setImageResource(
+        ImageAssetsViewModel.sHeadResources[mImageAssetsViewModel.getHeadIndex().getValue()]);
 
     mBodyView = view.findViewById(R.id.body_body);
-    mBodyView.setImageResource(ImageAssetsViewModel.sBodyResources[mImageAssetsViewModel.getBodyIndex().getValue()]);
+    mBodyView.setImageResource(
+        ImageAssetsViewModel.sBodyResources[mImageAssetsViewModel.getBodyIndex().getValue()]);
 
     mLegsView = view.findViewById(R.id.body_legs);
-    mLegsView.setImageResource(ImageAssetsViewModel.sLegsResources[mImageAssetsViewModel.getLegsIndex().getValue()]);
+    mLegsView.setImageResource(
+        ImageAssetsViewModel.sLegsResources[mImageAssetsViewModel.getLegsIndex().getValue()]);
 
     return view;
   }
